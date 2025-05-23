@@ -20,7 +20,7 @@ const MessagesContainer = styled.div`
   background-color: #f9f9f9;
 `;
 
-const Message = styled.div<{ isUser: boolean }>`
+const MessageBubble  = styled.div<{ isUser: boolean }>`
   margin-bottom: 12px;
   padding: 10px 14px;
   border-radius: 18px;
@@ -61,13 +61,13 @@ const SendButton = styled.button`
   }
 `;
 
-interface Message {
+interface MessageType  {
   text: string;
   isUser: boolean;
 }
 
 const AIChat: React.FC = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<MessageType []>([]);
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const workerUrl = 'https://my-cloud-worker.sapphirewhite59.workers.dev';
@@ -82,7 +82,7 @@ const AIChat: React.FC = () => {
 
   const handleSend = async () => {
     if (input.trim()) {
-      const newUserMessage: Message = { text: input, isUser: true };
+      const newUserMessage: MessageType  = { text: input, isUser: true };
       setMessages((prevMessages) => [...prevMessages, newUserMessage]);
       setInput('');
 
@@ -100,11 +100,11 @@ const AIChat: React.FC = () => {
         }
 
         const data = await response.json();
-        const aiMessage: Message = { text: data.response || 'Error: No response from AI', isUser: false };
+        const aiMessage: MessageType  = { text: data.response || 'Error: No response from AI', isUser: false };
         setMessages((prevMessages) => [...prevMessages, aiMessage]);
       } catch (error) {
         console.error('Error sending message to worker:', error);
-        const errorMessage: Message = { text: 'Error: Could not connect to AI.', isUser: false };
+        const errorMessage: MessageType  = { text: 'Error: Could not connect to AI.', isUser: false };
         setMessages((prevMessages) => [...prevMessages, errorMessage]);
       }
     }
@@ -120,9 +120,9 @@ const AIChat: React.FC = () => {
     <ChatContainer>
       <MessagesContainer>
         {messages.map((msg, index) => (
-          <Message key={index} isUser={msg.isUser}>
+          <MessageBubble  key={index} isUser={msg.isUser}>
             {msg.text}
-          </Message>
+          </MessageBubble >
         ))}
         <div ref={messagesEndRef} />
       </MessagesContainer>
