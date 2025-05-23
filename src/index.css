@@ -1,3 +1,6 @@
+
+
+/* 基本重置和全局字体 */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +8,108 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f4f7f9; /* 浅灰色背景 */
+  color: #333; /* 主要文本颜色 */
+  line-height: 1.6;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.App {
+  max-width: 1200px; /* 内容最大宽度 */
+  margin: 0 auto; /* 页面居中 */
+  padding: 0 20px; /* 左右留白 */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* 应用至少占满整个视窗高度 */
 }
+
+/* 头部和标题 */
+.app-header {
+  background-color: #2c3e50; /* 深蓝灰色背景 */
+  color: #ecf0f1; /* 浅色文字 */
+  padding: 20px 0;
+  text-align: center;
+  margin-bottom: 30px;
+  border-bottom: 4px solid #3498db; /* 蓝色强调边框 */
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 2.5em;
+  font-weight: 300;
+}
+
+/* 导航栏样式 */
+.app-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* 链接之间的间距 */
+}
+
+.app-nav ul li {
+  display: inline-block;
+}
+
+.app-nav ul li a {
+  text-decoration: none;
+  color: #bdc3c7; /* 导航链接颜色 */
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-weight: 500;
+  font-size: 1.1em;
+}
+
+.app-nav ul li a:hover {
+  background-color: #34495e; /* 悬停背景色 */
+  color: #ffffff; /* 悬停文字颜色 */
+}
+
+/* 激活链接的样式 */
+.app-nav ul li a.active-link {
+  background-color: #3498db; /* 激活链接背景色 (蓝色) */
+  color: #ffffff; /* 激活链接文字颜色 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* 主要内容区域 */
+.app-content {
+  flex-grow: 1; /* 让内容区域占据剩余空间 */
+  background-color: #ffffff; /* 内容区白色背景 */
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* 轻微阴影效果 */
+}
+
+/* 首页特定样式 */
+.home-page {
+  text-align: center;
+}
+.home-page h2 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+/* 页脚 */
+.app-footer {
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 30px;
+  color: #7f8c8d; /* 页脚文字颜色 */
+  border-top: 1px solid #e0e0e0; /* 页脚上边框 */
+  font-size: 0.9em;
+}
+
+/* 你可以在这里为 AIChat 和 CodeReview 组件添加通用样式 */
+/* 例如，如果它们都有一个共同的容器类 */
+.component-container {
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+/* AIChat 和 CodeReview 组件内部的样式，建议在它们各自的CSS文件中定义 */
+/* 但如果需要全局覆盖或基础设定，也可以在这里添加 */
