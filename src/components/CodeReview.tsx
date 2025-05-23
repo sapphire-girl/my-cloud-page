@@ -15,7 +15,6 @@ const CodeReview: React.FC = () => {
 
   const workerUrl = 'https://my-cloud-worker.sapphirewhite59.workers.dev';
 
-  // const workerUrl = 'http://127.0.0.1:8787';
 
   const handleReviewCode = async () => {
     setLoading(true);
