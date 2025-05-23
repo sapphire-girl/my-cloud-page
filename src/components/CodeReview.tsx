@@ -2,18 +2,20 @@ import React, { useState } from 'react';
 import './CodeReview.css'; // Assuming you have a CSS file for styling
 
 interface ReviewResult {
-  review: string;
-  suggestions: string[];
+  reply: string;
+  review?: string; 
+  suggestions?: string[];
 }
 
 const CodeReview: React.FC = () => {
   const [code, setCode] = useState('');
-  const [reviewResult, setReviewResult] = useState<ReviewResult | null>(null);
+  const [reviewResult, setReviewResult] = useState<ReviewResult | null>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const workerUrl = 'https://my-cloud-worker.sapphirewhite59.workers.dev';
 
+  // const workerUrl = 'http://127.0.0.1:8787';
 
   const handleReviewCode = async () => {
     setLoading(true);
@@ -26,7 +28,7 @@ const CodeReview: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ code }),
+        body: JSON.stringify({ message: code }),
       });
 
       if (!response.ok) {
@@ -34,7 +36,8 @@ const CodeReview: React.FC = () => {
         throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
       }
 
-      const data: ReviewResult = await response.json();
+      const data: { reply: string } = await response.json();
+      console.log('Review result:', data.reply);
       setReviewResult(data);
     } catch (err: any) {
       console.error('Error reviewing code:', err);
@@ -70,19 +73,9 @@ const CodeReview: React.FC = () => {
         <div className="review-results">
           <h2>审查结果</h2>
           <div className="review-summary">
-            <h3>总结</h3>
-            <p>{reviewResult.review}</p>
+         {reviewResult.reply}
           </div>
-          {reviewResult.suggestions && reviewResult.suggestions.length > 0 && (
-            <div className="review-suggestions">
-              <h3>改进建议</h3>
-              <ul>
-                {reviewResult.suggestions.map((suggestion, index) => (
-                  <li key={index}>{suggestion}</li>
-                ))}
-              </ul>
-            </div>
-          )}
+        
         </div>
       )}
     </div>

@@ -71,6 +71,7 @@ const AIChat: React.FC = () => {
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const workerUrl = 'https://my-cloud-worker.sapphirewhite59.workers.dev';
+  // const workerUrl = 'http://127.0.0.1:8787';
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -100,7 +101,8 @@ const AIChat: React.FC = () => {
         }
 
         const data = await response.json();
-        const aiMessage: MessageType  = { text: data.response || 'Error: No response from AI', isUser: false };
+        console.log('Response from worker:', data);
+        const aiMessage: MessageType  = { text: data.reply || 'Error: No response from AI', isUser: false };
         setMessages((prevMessages) => [...prevMessages, aiMessage]);
       } catch (error) {
         console.error('Error sending message to worker:', error);
